@@ -1,0 +1,32 @@
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        // Your code here
+        
+        int n = arr.length;
+        int max_element = arr[0];
+        for (int i=1; i<n; i++){
+            if (arr[i] > max_element){
+                max_element = arr[i];
+            }
+        }
+        
+        int[] freq = new int[max_element + 1];
+        
+        Arrays.fill(freq, 0);
+        for (int i=0; i<n; i++){
+            freq[arr[i]]++;
+        }
+        
+        int count = 0;
+        for (int i=0; i<=max_element; i++){
+            if (freq[i] != 0){
+                count += freq[i];
+                if (count >= k){
+                    return i;
+                }
+            }
+            
+        }
+        return -1;
+    }
+}
